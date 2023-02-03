@@ -8,8 +8,6 @@
 #include <time.h>
 #include "queue.h"
 
-
-// какая то структура 
 struct packet
 {
     int *a;
@@ -18,7 +16,7 @@ struct packet
     int r;
 };
 
-// switch
+
 void compexch(int *a, int *b)
 {
     if (*b < *a) {
@@ -28,7 +26,6 @@ void compexch(int *a, int *b)
     }
 }
 
-// проверка символа на целое число
 bool is_int(char *a)
 {
     char *temp = a;
@@ -42,8 +39,6 @@ bool is_int(char *a)
     return true;
 }
 
-
-// преобразование массива символов в число
 int str_to_int(char *a)
 {
     int sign = 1;
@@ -63,7 +58,6 @@ int str_to_int(char *a)
 }
 
 
-// поиск максимального значения в массиве
 int max_from_array(int *a, const int size)
 {
     int max = INT_MIN;
@@ -104,7 +98,7 @@ void *OddEvenSplitThreadEdition(void *arg)
 }
 
 void OddEvenSplit(int a[], const int size, const int max_threads, queue *q)
-{s
+{
     int l = 0;
     int r = size - 1;
     if (r == l + 1) compexch(&a[l], &a[r]);
