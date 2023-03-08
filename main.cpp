@@ -15,8 +15,22 @@ void compexch(T& a, T& b)
 }
 
 
+
 template <class T>
-void shuffle(std::vector<T> a, unsigned int l, unsigned int r)
+void printVector(vector<T> a)
+{
+
+    for (auto i = 0; i < a.size(); i++)
+    {
+        cout << a[i];
+        if (i < a.size())
+            cout << ", ";
+    }
+}
+
+
+template <class T>
+void shuffle(vector<T>& a, unsigned int l, unsigned int r)
 {
     
     auto half = (unsigned int) (l + r) / 2;
@@ -33,12 +47,12 @@ void shuffle(std::vector<T> a, unsigned int l, unsigned int r)
 }
 
 template <class T>
-void unshuffle(std::vector<T> a, unsigned int l, unsigned int r)
+void unshuffle(vector<T>& a, unsigned int l, unsigned int r)
 {
 
     auto half = (unsigned int) (l + r) / 2;
     vector<T> tmp(a.size());
-    unsigned int i, j;
+    unsigned int i, j;shuffle
 
     for (i = l, j = 0; i <= r; i += 2, j++){
         tmp[l + j] = a[i];
@@ -50,7 +64,7 @@ void unshuffle(std::vector<T> a, unsigned int l, unsigned int r)
 }
 
 template <class T>
-void OddEvenMergeSort(std::vector<T> &a, unsigned int l, unsigned int r)
+void OddEvenMergeSort(vector<T> &a, unsigned int l, unsigned int r)
 {
 
     if (r == l + 1)
@@ -59,10 +73,9 @@ void OddEvenMergeSort(std::vector<T> &a, unsigned int l, unsigned int r)
         return;
     unshuffle(a, l, r);
     auto half = (unsigned int) (l + r) / 2;
-    thread th1(OddEvenMergeSort, a, l, half);
-    thread th2(OddEvenMergeSort, a, half + 1, r);
-    th1.join();
-    th2.join();
+    OddEvenMergeSort(a, l, half);
+    OddEvenMergeSort(a, half + 1, r);
+
 
     shuffle(a, l, r);
     for (auto i = l + 1; i < r; i += 2)
@@ -73,18 +86,6 @@ void OddEvenMergeSort(std::vector<T> &a, unsigned int l, unsigned int r)
     for (int i = l + 1; i + halfSize < r; i++)
         compexch(a[i], a[i + halfSize]);
 
-}
-
-template <class T>
-void printVector(std::vector<T> a)
-{
-
-    for (auto i = 0; i < a.size(); i++)
-    {
-        cout << a[i];
-        if (i < a.size())
-            cout << ", ";
-    }
 }
 
 
